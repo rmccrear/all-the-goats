@@ -56,13 +56,13 @@ function handleGoatClick(event) {
     event.preventDefault();
     let target = event.target;
     let goatName = target.alt;
-
+    console.log(goatName);
     // TODO, I have the goat's name
     //       I want the goat object
     let theBestGoat;
     for(let i=0; i<goatArray.length; i++) {
         let goat = goatArray[i];
-        if(goat.name === goatName) {
+        if(goat.name === target.alt) {
             theBestGoat = goat;
         }
     }
