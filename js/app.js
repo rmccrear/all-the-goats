@@ -25,10 +25,24 @@ function Goat(name, imgSrc) {
 
 let cruisinGoat = new Goat("CrusinGoat", "./img/cruisin-goat.jpg");
 let floatGoat = new Goat("FloatYourGoat", "./img/float-your-goat.jpg");
+let goatAway = new Goat("GoatAway", "./img/goat-away.jpg");
+let goatOutOfHand = new Goat("GoatOutOfHand", "./img/goat-out-of-hand.jpg");
+let kissingGoat = new Goat("KissingGoat", "./img/kissing-goat.jpg");
+let sassyGoat = new Goat("SassyGoat", "./img/sassy-goat.jpg");
+let smilingGoat = new Goat("SmilingGoat", "./img/smiling-goat.jpg");
+let sweaterGoat = new Goat("SweaterGoat", "./img/sweater-goat.jpg");
 
 let goatArray = [];
 goatArray.push(cruisinGoat);
 goatArray.push(floatGoat);
+goatArray.push(goatAway);
+goatArray.push(goatOutOfHand);
+goatArray.push(kissingGoat);
+goatArray.push(sassyGoat);
+goatArray.push(smilingGoat);
+goatArray.push(sweaterGoat);
+
+
 
 // TODO: Voting Machine DOM
 
@@ -44,7 +58,24 @@ function setGoatImages(goat1, goat2) {
     goat2Img.title = goat2.name;
 }
 
-setGoatImages(goatArray[0], goatArray[1]);
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function setRandomGoatImages() {
+    let goatIndex1 = getRandomInt(goatArray.length);
+    let goatIndex2 = getRandomInt(goatArray.length);
+    while(goatIndex1 === goatIndex2) {
+      goatIndex1 = getRandomInt(goatArray.length);
+      goatIndex2 = getRandomInt(goatArray.length);
+    }
+    let goat1 = goatArray[goatIndex1];
+    let goat2 = goatArray[goatIndex2];
+    setGoatImages(goat1, goat2);
+}
+
+// setGoatImages(goatArray[0], goatArray[1]);
+setRandomGoatImages();
 
 // Step 1, get the elements
 // voting area, above
@@ -69,6 +100,7 @@ function handleGoatClick(event) {
 
     theBestGoat.voteCount++;
     console.log(theBestGoat.voteCount);
+    setRandomGoatImages();
 }
 
 // Step 3 add the event handler
