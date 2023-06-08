@@ -123,8 +123,54 @@ function renderResults() {
         goatUL.appendChild(goatLI);
     }
     resultsArea.appendChild(goatUL);
+    displayChart(goatArray);
 }
 
 // // TODO: make a button to show vote results
 let showResultsButton = document.getElementById("show-results-button");
 showResultsButton.addEventListener("click", renderResults);
+
+// TODO: create a function that displays a chart with our data
+
+let chart;
+function displayChart(data) {
+    if(chart !== undefined){
+        chart.destroy();
+    }
+    let labels = getLabelData(data);
+    let votes = getVoteData(data);
+    let ctx = document.getElementById("chart-canvas");
+    let dataObj = {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "votes for goats",
+                    data: votes
+                }
+            ]
+        }
+    }
+    chart = new Chart(ctx, dataObj);
+}
+
+// input: array of goats
+// output: array of numbers representing the goat votes
+function getVoteData(goatArray) {
+    let votes = [];
+    for(let goat of goatArray) {
+        votes.push(goat.voteCount);
+    }
+    return votes
+}
+
+// input: array of goats
+// output: array of numbers representing the goat names
+function getLabelData(goatArray) {
+    let labels = [];
+    for(let goat of goatArray) {
+        labels.push(goat.name);
+    }
+    return labels;
+}
